@@ -11,11 +11,13 @@ int main() {
   if (fork()) {
     if (fork()) {
       int childstatus;
+      waitpid(-1,&childstatus,0);
       if (WIFEXITED(childstatus)) {
 	printf("Child status: %d\n",WEXITSTATUS(childstatus));
       } else {
 	printf("Child did not exit correctly. Exit code %d\n",WEXITSTATUS(childstatus));
       }
+      printf("Parent is done.\n");
       return(0);
     }
   }
